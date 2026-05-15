@@ -23,10 +23,23 @@ public abstract class Viaje implements Observable {
 
     public void setEstado(EstadoViaje estado) {
         this.estado = estado;
+        System.out.println("[State] Estado actual: " + estado.getNombreEstado());
     }
 
     public EstadoViaje getEstado() {
         return estado;
+    }
+
+    public String getNombreEstado() {
+        return estado.getNombreEstado();
+    }
+
+    public void solicitar() {
+        estado.solicitar(this);
+    }
+
+    public void asignar() {
+        estado.asignar(this);
     }
 
     public void iniciar() {
