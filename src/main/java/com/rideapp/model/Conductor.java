@@ -14,4 +14,8 @@ public class Conductor implements Observador {
     public void actualizar(String mensaje) {
         System.out.println("[Observer] Conductor " + nombre + ": " + mensaje);
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
