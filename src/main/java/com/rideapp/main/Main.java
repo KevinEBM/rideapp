@@ -4,6 +4,9 @@ import com.rideapp.app.RideApp;
 
 import builder.ViajeBuilder;
 import factory.ViajeFactory;
+import mediator.CentralViajesMediator;
+import model.Conductor;
+import model.Pasajero;
 import model.Viaje;
 
 public class Main {
@@ -17,15 +20,25 @@ public class Main {
         app.mostrarInstanciaUnica();
         app.recibirSolicitud();
 
+        // Crear participantes
+        Pasajero pasajero = new Pasajero("Alice");
+        Conductor conductor = new Conductor("Bob");
+
+        // Configurar mediator y registrar conductor
+        CentralViajesMediator mediator = new CentralViajesMediator();
+        mediator.registrarConductor(conductor);
+
+        // Crear viaje mediante Factory + Builder
         Viaje viaje = new ViajeBuilder(ViajeFactory.crearViaje("premium"))
             .setWifi(true)
             .setMascota(false)
             .setEquipaje(true)
             .build();
-        System.out.println("[Mediator] Conductor asignado");
-        System.out.println("[Observer] Pasajero notificado");
 
-        viaje.asignar();
+        // Solicitar viaje a través del mediator
+        mediator.solicitarViaje(pasajero, viaje);
+
+        // Continuar flujo de estado
         viaje.iniciar();
         viaje.finalizar();
 

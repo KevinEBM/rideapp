@@ -14,4 +14,8 @@ public class Pasajero implements Observador {
     public void actualizar(String mensaje) {
         System.out.println("[Observer] Pasajero " + nombre + ": " + mensaje);
     }
+
+    public String getNombre() {
+        return nombre;
+    }
 }
